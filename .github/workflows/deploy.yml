@@ -13,12 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
     - name: Install Render CLI
       run: |
-        curl -sSL https://cli.render.com/install.sh | sh
+        npm install -g @render/cli
 
     - name: Deploy to Render
       env:
         RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
       run: |
         render deploy my-web-app
+
